@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/aaa"
+                tools:context=".MainActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/Vp"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"/>
+
+    <LinearLayout
+        android:layout_alignBottom="@+id/Vp"
+        android:background="#44000000"
+        android:layout_width="match_parent"
+        android:padding="3dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:text="美国队长3"
+            android:padding="3dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <LinearLayout
+            android:id="@+id/ll_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
