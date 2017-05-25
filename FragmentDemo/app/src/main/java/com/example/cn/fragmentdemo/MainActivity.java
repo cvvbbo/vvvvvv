@@ -298,20 +298,26 @@ public class MainActivity extends  FragmentActivity {
                             break;
                         case R.drawable.c:
 
+                            if (isclick) {
                             getSupportFragmentManager().
                                     beginTransaction().
                                     addToBackStack(null).
                                     replace(R.id.aaa, new newfragment2()).
                                     commit();
+                                isclick=false;
+                            }
 
                             break;
                         case R.drawable.d:
 
+                            if (isclick) {
                             getSupportFragmentManager().
                                     beginTransaction().
                                     addToBackStack(null).
                                     replace(R.id.aaa, new newfragment3()).
                                     commit();
+                            isclick=false;
+                       }
                             break;
                     }
                 }
