@@ -320,6 +320,7 @@ public class MainActivity extends  FragmentActivity {
 
     }
 
+    //这个是能够让viewpager被点击之后能够跳转然后在跳转的页面里面再点击视图也不会出现跳转错误，就是视图不会发生重叠 2018.1.4
     @Override
     public void onBackPressed() {
         super.onBackPressed();
