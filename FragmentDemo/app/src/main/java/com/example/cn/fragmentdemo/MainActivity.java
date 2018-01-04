@@ -81,20 +81,13 @@ public class MainActivity extends  FragmentActivity {
             int item = viewPager.getCurrentItem() + 1;
             viewPager.setCurrentItem(item);//这个先写，int item后写
 
-            h.sendEmptyMessageDelayed(0, 4000);
+            //这里的发送消息是能够让viewpager自动轮播的关键 2017.1.4
+            h.sendEmptyMessageDelayed(0, 2500);
 
         }
     };
 
 
-    android.os.Handler  h2=new android.os.Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            isclick=true;
-            h2.sendEmptyMessageDelayed(0,4000);
-        }
-    };
 
     //private int realPosition = 0;
 
@@ -139,8 +132,8 @@ public class MainActivity extends  FragmentActivity {
         //下面这个参数是为了定位到某个位置
         int item = Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % imageViews.size();//要保证是5的整数倍，没有为什么。不然可能会出错
         viewPager.setCurrentItem(item);
-        h.sendEmptyMessageDelayed(0, 4000);
-        h2.sendEmptyMessageDelayed(0,4000);
+        h.sendEmptyMessageDelayed(0, 2500);
+        //h2.sendEmptyMessageDelayed(0,4000);
 
     }
 
@@ -263,7 +256,8 @@ public class MainActivity extends  FragmentActivity {
                 public void onClick(View v) {
                     switch ((int) v.getTag()) {
                         case R.drawable.a:
-                            if (isclick) {
+
+                                viewPager.setVisibility(View.GONE);
                                 h.removeCallbacksAndMessages(null);
                                 getSupportFragmentManager().
                                         beginTransaction().
@@ -271,80 +265,69 @@ public class MainActivity extends  FragmentActivity {
                                         addToBackStack(null).
                                         replace(R.id.aaa, new newfragment()).
                                         commit();
-                                isclick=false;
-                                Log.e("第一次的情况"," "+isclick);
+                                //isclick=false;
+                                //
+                                //h2.sendEmptyMessageDelayed(0,4000);
 
-                                h2.sendEmptyMessageDelayed(0,4000);
 
-                            }
+                            //这个能够一直点击，但是不是想要的效果。。因为点击了之后要点击相同次数才能出来
+                            //牛逼的不行还能手动滑动。。
 
-                            Log.e("发了消息之后情况"," "+isclick);
 
                             break;
 
                         case R.drawable.b:
 
-                            if (isclick) {
-                                Log.e("第二个fragment开始", isclick + " ");
+                            viewPager.setVisibility(View.GONE);
+                            h.removeCallbacksAndMessages(null);
                                 getSupportFragmentManager().
                                         beginTransaction().
                                         addToBackStack(null).
                                         replace(R.id.aaa, new newfragment1()).
                                         commit();
-                                isclick=false;
-                            }
-                            Log.e("第二个fragment结束", isclick + " ");
 
                             break;
                         case R.drawable.c:
 
-                            if (isclick) {
+                            viewPager.setVisibility(View.GONE);
+                            h.removeCallbacksAndMessages(null);
                             getSupportFragmentManager().
                                     beginTransaction().
                                     addToBackStack(null).
                                     replace(R.id.aaa, new newfragment2()).
                                     commit();
-                                isclick=false;
-                            }
+
 
                             break;
                         case R.drawable.d:
 
-                            if (isclick) {
+                            viewPager.setVisibility(View.GONE);
                             getSupportFragmentManager().
                                     beginTransaction().
                                     addToBackStack(null).
                                     replace(R.id.aaa, new newfragment3()).
                                     commit();
-                            isclick=false;
-                       }
+
                             break;
                     }
                 }
             });
 
-            // imageView.setEnabled(true);
-
-
-
-
-
-
-           /* imageView.setTag(R.drawable.a);
-            Log.e(TAG, "setTag" + TAG);
-            imageView.setTag(R.drawable.b);
-            Log.e(TAG, "setTag" + TAG);
-            imageView.setTag(R.drawable.c);
-            Log.e(TAG, "setTag" + TAG);
-            imageView.setTag(R.drawable.d);
-            Log.e(TAG, "setTag" + TAG);*/
 
             return imageView;
 
         }
 
+    }
 
-    }}
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        h.sendEmptyMessageDelayed(0,2500);
+        viewPager.setVisibility(View.VISIBLE);
+
+    }
+}
 
 
 
